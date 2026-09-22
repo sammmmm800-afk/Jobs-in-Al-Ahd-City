@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كراج الميكانيك - مدينة العهد</title>
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============== الهيدر ============== -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="logo.png" class="logo-mark" alt="شعار كراج الميكانيك">
+      كراج الميكانيك
+    </a>
+
+    <nav class="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="index.html" class="active">الميكانيك</a>
+      <a href="laws.html">المخالفات</a>
+      <a href="forms.html">النماذج</a>
+
+      <div class="nav-drop">
+        <button type="button">
+          الجداول <span class="chev">▾</span>
+        </button>
+        <div class="nav-drop-menu">
+          <a href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=641894827#gid=641894827" target="_blank" rel="noopener">جدول كراج الميكانيك</a>
+          <a href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=614708762#gid=614708762" target="_blank" rel="noopener">شروط الترقيات</a>
+          <a href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=412218856#gid=412218856" target="_blank" rel="noopener">شروط ترقيات المعتمدين</a>
+          <a href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=1461460125#gid=1461460125" target="_blank" rel="noopener">المركبات الرسمية</a>
+        </div>
+      </div>
+    </nav>
+
+    <a class="header-cta" href="#" target="_blank" rel="noopener">
+      📘 <span class="cta-text">الدليل الشامل</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="فتح القائمة">☰</button>
+  </div>
+</header>
+
+<!-- ============== الهيرو ============== -->
+<section class="hero">
+  <div class="container">
+    <img src="logo.png" class="hero-mark" alt="كراج الميكانيك">
+    <h1>كراج الميكانيك</h1>
+    <p class="hero-sub">مدينة العهد</p>
+    <a href="#generator" class="pill-btn">⚙️ خدمتكم شرف لنا</a>
+  </div>
+</section>
+
+<!-- ============== مولد المسمى الميداني ============== -->
+<section class="section" id="generator">
+  <div class="container">
+    <div class="section-head">
+      <h2><span class="icon-tag">🏷️</span> المسمى الميداني</h2>
+      <p>أنشئ مسماك الميداني بالتنسيق الرسمي</p>
+    </div>
+
+    <div class="generator-wrap">
+      <div class="generator-card">
+        <div class="generator-title">👤 مولد المسمى</div>
+
+        <form id="callsign-form" novalidate>
+          <div class="field">
+            <label for="callsign-name">👤 الاسم</label>
+            <input type="text" id="callsign-name" placeholder="أدخل اسمك" required>
+          </div>
+
+          <div class="field">
+            <label for="callsign-direction">🧭 التوجيه</label>
+            <input type="text" id="callsign-direction" placeholder="أدخل التوجيه (مثال: فني لوس)" required>
+          </div>
+
+          <div class="field">
+            <label for="callsign-code"># الكود الميداني</label>
+            <div class="code-field">
+              <input type="text" id="callsign-code" placeholder="000" inputmode="numeric" maxlength="3" required>
+              <span class="code-prefix">-G</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">✏️ إنشاء المسمى</button>
+        </form>
+
+        <div class="result-box" id="callsign-result">
+          <div class="result-text" id="callsign-result-text"></div>
+          <button type="button" class="btn-secondary" id="callsign-copy">📋 نسخ المسمى</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== أكواد الحالات ============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2><span class="icon-tag">&lt;/&gt;</span> أكواد الحالات الخاصة بالكراج</h2>
+      <p>الأكواد المستخدمة للتواصل في الموجة</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card code-card">
+        <div class="code-card-top">
+          <strong>كود 1</strong>
+          <span class="badge-icon ready">✅</span>
+        </div>
+        <p>تعني جاهز لاستلام البلاغات</p>
+      </div>
+
+      <div class="card code-card">
+        <div class="code-card-top">
+          <strong>كود 6</strong>
+          <span class="badge-icon fuel">⛽</span>
+        </div>
+        <p>تعني أنك تحتاج إلى التزود بالأكل والشرب وتعبئة المركبة بالوقود</p>
+      </div>
+
+      <div class="card code-card">
+        <div class="code-card-top">
+          <strong>كود 7</strong>
+          <span class="badge-icon break">☕</span>
+        </div>
+        <p>تعني أنك تحتاج إلى استراحة لمدة لا تتجاوز عن 10 دقائق</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== روابط سريعة ============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2><span class="icon-tag">🔗</span> روابط سريعة</h2>
+      <p>وصول سريع لأهم الجداول والأدلة</p>
+    </div>
+
+    <div class="grid grid-3">
+      <a class="card link-card" href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=641894827#gid=641894827" target="_blank" rel="noopener">
+        <span class="icon-circle">👥</span>
+        <span>
+          <strong>جدول كراج الميكانيك</strong>
+          <span>قائمة الفنيين والمستويات</span>
+        </span>
+      </a>
+
+      <a class="card link-card" href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=614708762#gid=614708762" target="_blank" rel="noopener">
+        <span class="icon-circle">⬆️</span>
+        <span>
+          <strong>شروط الترقيات</strong>
+          <span>متطلبات الترقية لكل مستوى</span>
+        </span>
+      </a>
+
+      <a class="card link-card" href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=412218856#gid=412218856" target="_blank" rel="noopener">
+        <span class="icon-circle">⭐</span>
+        <span>
+          <strong>شروط ترقيات المعتمدين</strong>
+          <span>متطلبات اللاعب المعتمد</span>
+        </span>
+      </a>
+
+      <a class="card link-card" href="https://docs.google.com/spreadsheets/d/19WAA7KQZZ2siRXvMGNuiGSErWM-Z2cH6ZtHa5cfqFQI/edit?gid=1461460125#gid=1461460125" target="_blank" rel="noopener">
+        <span class="icon-circle">🚗</span>
+        <span>
+          <strong>المركبات الرسمية</strong>
+          <span>قائمة مركبات الكراج</span>
+        </span>
+      </a>
+
+      <a class="card link-card" href="#" target="_blank" rel="noopener">
+        <span class="icon-circle">📘</span>
+        <span>
+          <strong>الدليل الشامل</strong>
+          <span>دليل كراج الميكانيك الكامل</span>
+        </span>
+      </a>
+
+      <a class="card link-card" href="laws.html">
+        <span class="icon-circle">🔨</span>
+        <span>
+          <strong>المخالفات والعقوبات</strong>
+          <span>قائمة المخالفات والغرامات</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== تردد الموجات ============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2><span class="icon-tag">📡</span> تردد الموجات</h2>
+      <p>الموجات المعتمدة للتواصل مع القطاعات</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card freq-card">
+        <strong class="freq-title">🔧 كراج الميكانيك</strong>
+        <div class="freq-row"><span>موجة الميكانيك الرسمية</span><span class="freq-num">18</span></div>
+        <div class="freq-row"><span>للتعديل والتزويد فقط</span><span class="freq-num">17</span></div>
+      </div>
+
+      <div class="card freq-card">
+        <strong class="freq-title">🛡️ الأمن العام</strong>
+        <div class="freq-row"><span>عمليات لوس سانتوس</span><span class="freq-num">4</span></div>
+        <div class="freq-row"><span>عمليات ساندي وبوليتو</span><span class="freq-num">5</span></div>
+      </div>
+
+      <div class="card freq-card">
+        <strong class="freq-title">🚧 حرس الحدود</strong>
+        <div class="freq-row"><span>الميناء الرئيسي</span><span class="freq-num">8</span></div>
+        <div class="freq-row"><span>عمليات ساندي وبوليتو</span><span class="freq-num">9</span></div>
+      </div>
+
+      <div class="card freq-card">
+        <strong class="freq-title">🚑 الهلال الأحمر</strong>
+        <div class="freq-row"><span>عمليات لوس سانتوس</span><span class="freq-num">13</span></div>
+        <div class="freq-row"><span>عمليات ساندي وبوليتو</span><span class="freq-num">14</span></div>
+      </div>
+
+      <div class="card freq-card">
+        <strong class="freq-title">👁️ الرقابة والتفتيش</strong>
+        <div class="freq-row"><span>في حال رأيت هاك فقط</span><span class="freq-num">12</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== مواقع الكراجات ============== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2><span class="icon-tag">🗺️</span> مواقع الكراجات</h2>
+      <p>اضغط على الخريطة للتكبير</p>
+    </div>
+
+    <a class="map-frame" href="locations-map.png" target="_blank" rel="noopener">
+      <img src="locations-map.png" alt="خدمات ومواقع كراج الميكانيك">
+    </a>
+    <p class="map-hint">اضغط على الصورة لعرضها بالحجم الكامل</p>
+
+  </div>
+</section>
+
+<!-- ============== ديسكورد ============== -->
+<section class="section">
+  <div class="container">
+    <div class="discord-card">
+      <h3>انضم إلى مجتمعنا</h3>
+      <p>تواصل معنا على ديسكورد مدينة العهد</p>
+      <a class="pill-btn" href="https://discord.gg/a14" target="_blank" rel="noopener">💬 انضم الآن</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== الفوتر ============== -->
+<footer class="site-footer">
+  <div class="container">
+    <img src="logo.png" class="logo-mark" alt="كراج الميكانيك">
+    <strong>كراج الميكانيك</strong>
+    <p class="footer-sub">مدينة العهد</p>
+    <div class="footer-legal">© 2026 جميع الحقوق محفوظة</div>
+    <div class="footer-dev">تطوير وبرمجة: رعد الشايب</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
