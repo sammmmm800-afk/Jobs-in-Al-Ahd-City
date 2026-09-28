@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>النماذج الإدارية - مديرية الأمن العام</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f1a35;
+      --accent: #4a90d9;
+      --accent-dark: #2d6bb3;
+      --bg-dark: #080d1a;
+      --bg-card: rgba(15, 26, 53, 0.8);
+      --border: rgba(74, 144, 217, 0.3);
+      --border-light: rgba(255, 255, 255, 0.1);
+      --text: #e8ecf4;
+      --text-muted: rgba(232, 236, 244, 0.7);
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(ellipse at 20% 0%, rgba(42, 64, 128, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(74, 144, 217, 0.15) 0%, transparent 50%),
+        var(--bg-dark);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: rgba(8, 13, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo img {
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      background: white;
+    }
+
+    .nav-logo span { font-size: 16px; font-weight: 700; color: var(--accent); }
+
+    .nav-links { display: flex; gap: 20px; }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover { background: rgba(74, 144, 217, 0.15); color: var(--accent); }
+
+    .container {
+      max-width: 700px;
+      margin: 100px auto 50px;
+      padding: 0 20px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      font-size: 15px;
+      color: var(--text);
+      font-family: inherit;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.2);
+    }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234a90d9' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 15px center;
+      background-size: 18px;
+    }
+
+    .form-select option { background: #0f1a35; color: var(--text); }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 25px;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(74, 144, 217, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(74, 144, 217, 0.4);
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.success {
+      background: var(--success);
+      color: white;
+    }
+
+    .toast.error {
+      background: var(--error);
+      color: white;
+    }
+
+    .footer {
+      background: rgba(8, 13, 26, 0.95);
+      border-top: 1px solid var(--border);
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .footer p { color: var(--text-muted); font-size: 14px; margin: 8px 0; }
+    .footer a { color: var(--accent); text-decoration: none; }
+
+    .footer-credit {
+      display: inline-block;
+      margin: 15px 0;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, rgba(74, 144, 217, 0.2), rgba(74, 144, 217, 0.05));
+      border: 1px solid rgba(74, 144, 217, 0.3);
+      border-radius: 20px;
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { display: none; }
+      .container { margin-top: 90px; }
+      .form-card { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="شعار الأمن العام">
+        <span>الأمن العام</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="index.html#reports" class="nav-link">التقارير</a>
+        <a href="laws.html" class="nav-link">الأنظمة والقوانين</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">النماذج الإدارية</h1>
+
+    <div class="form-card">
+      <div class="form-group">
+        <label>نوع الطلب</label>
+        <select class="form-select" id="requestType" onchange="switchForm()">
+          <option value="">اختر نوع الطلب</option>
+          <option value="فصل">فصل عسكري</option>
+          <option value="حكم">حكم عسكري</option>
+          <option value="استدعاء">استدعاء عسكري</option>
+          <option value="تسجيل_دخول">بادر تسجيل دخول</option>
+          <option value="تعيين">تعيين عسكري</option>
+          <option value="إعفاء">إعفاء عسكري</option>
+        </select>
+      </div>
+
+      <!-- فصل عسكري -->
+      <div id="formDismissal" class="form-section">
+        <div class="form-group">
+          <label>جهة الإصدار</label>
+          <select class="form-select" id="issuerDismissal">
+            <option value="">اختر جهة الإصدار</option>
+            <option value="1417408661625634858">رئاسة المجلس العسكري</option>
+            <option value="1271924904488337599">المجلس العسكري</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>رقم ملف التحقيق</label>
+          <input type="text" class="form-input" id="investigationFileDismissal" placeholder="أدخل رقم ملف التحقيق">
+        </div>
+        <div class="form-group">
+          <label>كوبي آيدي العسكري</label>
+          <input type="text" class="form-input" id="soldierCopyIdDismissal" placeholder="مثال: 123456789012345678">
+        </div>
+        <div class="form-group">
+          <label>اسم العسكري وكوده</label>
+          <input type="text" class="form-input" id="soldierNameCode" placeholder="أدخل اسم العسكري وكوده">
+        </div>
+        <div class="form-group">
+          <label>الحكم</label>
+          <textarea class="form-textarea" id="judgmentDismissal" placeholder="أدخل نص الحكم"></textarea>
+        </div>
+        <div class="form-group">
+          <label>السبب</label>
+          <textarea class="form-textarea" id="reasonDismissal" placeholder="أدخل السبب"></textarea>
+        </div>
+        <button class="submit-btn" onclick="copyDismissal()">نسخ نص الفصل العسكري</button>
+      </div>
+
+      <!-- حكم عسكري -->
+      <div id="formJudgment" class="form-section">
+        <div class="form-group">
+          <label>جهة الإصدار</label>
+          <select class="form-select" id="issuerJudgment">
+            <option value="">اختر جهة الإصدار</option>
+            <option value="1417408661625634858">رئاسة المجلس العسكري</option>
+            <option value="1271924904488337599">المجلس العسكري</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>رقم ملف التحقيق</label>
+          <input type="text" class="form-input" id="investigationFileJudgment" placeholder="أدخل رقم ملف التحقيق">
+        </div>
+        <div class="form-group">
+          <label>كوبي آيدي العسكري</label>
+          <input type="text" class="form-input" id="soldierCopyIdJudgment" placeholder="مثال: 123456789012345678">
+        </div>
+        <div class="form-group">
+          <label>الحكم</label>
+          <textarea class="form-textarea" id="judgmentJudgment" placeholder="أدخل نص الحكم"></textarea>
+        </div>
+        <div class="form-group">
+          <label>السبب</label>
+          <textarea class="form-textarea" id="reasonJudgment" placeholder="أدخل السبب"></textarea>
+        </div>
+        <button class="submit-btn" onclick="copyJudgment()">نسخ نص الحكم العسكري</button>
+      </div>
+
+      <!-- استدعاء عسكري -->
+      <div id="formSummon" class="form-section">
+        <div class="form-group">
+          <label>منشنات الاستدعاء (كوبي آيدي لكل سطر)</label>
+          <textarea class="form-textarea" id="additionalIdsSummon" placeholder="123456789012345678&#10;987654321098765432"></textarea>
+        </div>
+        <button class="submit-btn" onclick="copySummon()">نسخ نص الاستدعاء</button>
+      </div>
+
+      <!-- تسجيل دخول -->
+      <div id="formLogin" class="form-section">
+        <div class="form-group">
+          <label>منشنات إضافية (كوبي آيدي لكل سطر)</label>
+          <textarea class="form-textarea" id="additionalIdsLogin" placeholder="123456789012345678&#10;987654321098765432"></textarea>
+        </div>
+        <button class="submit-btn" onclick="copyLogin()">نسخ نص تسجيل الدخول</button>
+      </div>
+
+      <!-- تعيين عسكري -->
+      <div id="formAssignment" class="form-section">
+        <div class="form-group">
+          <label>قسم التعيين</label>
+          <select class="form-select" id="assignmentSection">
+            <option value="">اختر قسم التعيين</option>
+            <option value="1488555833947328756">الشؤون الإدارية</option>
+            <option value="1488564136643268788">الشرطة العسكرية</option>
+            <option value="1488580464032616581">مجلس القضاء العسكري</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>منشنات العسكريين (كوبي آيدي لكل سطر)</label>
+          <textarea class="form-textarea" id="soldierIdsAssignment" placeholder="123456789012345678&#10;987654321098765432"></textarea>
+        </div>
+        <button class="submit-btn" onclick="copyAssignment()">نسخ نص التعيين</button>
+      </div>
+
+      <!-- إعفاء عسكري -->
+      <div id="formExemption" class="form-section">
+        <div class="form-group">
+          <label>كوبي آيدي العسكريين (لكل سطر)</label>
+          <textarea class="form-textarea" id="soldierCopyIdExemption" placeholder="123456789012345678&#10;987654321098765432"></textarea>
+        </div>
+        <button class="submit-btn" onclick="copyExemption()">نسخ نص الإعفاء</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>جميع الحقوق محفوظة © 2026 | مديرية الأمن العام - مدينة العهد</p>
+    <p><span class="footer-credit">تنفيذ - هيال المطيري ❤️</span></p>
+    <p><a href="https://discord.gg/a14" target="_blank">discord.gg/a14</a></p>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // Disable right-click, copying, and selecting
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('cut', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function switchForm() {
+      const type = document.getElementById('requestType').value;
+      document.querySelectorAll('.form-section').forEach(f => f.classList.remove('active'));
+      
+      const formMap = {
+        'فصل': 'formDismissal',
+        'حكم': 'formJudgment',
+        'استدعاء': 'formSummon',
+        'تسجيل_دخول': 'formLogin',
+        'تعيين': 'formAssignment',
+        'إعفاء': 'formExemption'
+      };
+      
+      if (formMap[type]) {
+        document.getElementById(formMap[type]).classList.add('active');
+      }
+    }
+
+    function validateId(id) { return /^\d+$/.test(id.trim()); }
+
+    function copyDismissal() {
+      const issuer = document.getElementById('issuerDismissal').value;
+      const file = document.getElementById('investigationFileDismissal').value.trim();
+      const id = document.getElementById('soldierCopyIdDismissal').value.trim();
+      const name = document.getElementById('soldierNameCode').value.trim();
+      const judgment = document.getElementById('judgmentDismissal').value.trim();
+      const reason = document.getElementById('reasonDismissal').value.trim();
+
+      if (!issuer || !file || !id || !judgment || !reason) {
+        showToast('يرجى ملء جميع الحقول', 'error');
+        return;
+      }
+
+      const issuerText = issuer === '1417408661625634858' 
+        ? 'قرار حكم صادر من : <@&1417408661625634858>' 
+        : 'قرار حكم صادر من : <@&1271924904488337599>';
+
+      const text = `**﷽\n_\n﴿وَإِذَا حَكَمْتُمْ بَيْنَ النَّاسِ أَنْ تَحْكُمُوا بِالْعَدْلِ﴾\n\n${issuerText}\n\nوبناءً على ما ورد في ملف تحقيق رقم : ${file}\n\nعلى العسكري المذكور أدناه :\n<@${id}>\n${name}\n\nوبعد ماتم مناقشته مع المجلس العسكري والقُضاه فقد تقرر على المُدين اعلاه بالحكم :\n\n\`الحكم : ${judgment}\`\n\n\`السبب : ${reason}\`\n\n\`\`\`diff\n- يجب على الجميع الالتزام بقوانين الأمن العام\n\`\`\`**`;
+
+      navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
+    }
+
+    function copyJudgment() {
+      const issuer = document.getElementById('issuerJudgment').value;
+      const file = document.getElementById('investigationFileJudgment').value.trim();
+      const id = document.getElementById('soldierCopyIdJudgment').value.trim();
+      const judgment = document.getElementById('judgmentJudgment').value.trim();
+      const reason = document.getElementById('reasonJudgment').value.trim();
+
+      if (!issuer || !file || !id || !judgment || !reason) {
+        showToast('يرجى ملء جميع الحقول', 'error');
+        return;
+      }
+
+      const issuerText = issuer === '1417408661625634858' 
+        ? 'قرار حكم صادر من : <@&1417408661625634858>' 
+        : 'قرار حكم صادر من : <@&1271924904488337599>';
+
+      const text = `**﷽\n\n﴿وَإِذَا حَكَمْتُمْ بَيْنَ النَّاسِ أَنْ تَحْكُمُوا بِالْعَدْلِ﴾\n\n${issuerText}\n\nوبناءً على ما ورد في ملف تحقيق رقم : ${file}\n\nعلى العسكري المذكور أدناه :\n<@${id}>\n\nوبعد ماتم مناقشته مع المجلس العسكري والقُضاه فقد تقرر على المُدين اعلاه بالحكم :\n\n\`الحكم : ${judgment}\`\n\n\`السبب : ${reason}\`\n\n\`\`\`diff\n- يجب على الجميع الالتزام بقوانين الأمن العام\n\`\`\`**`;
+
+      navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
+    }
+
+    function copySummon() {
+      const ids = document.getElementById('additionalIdsSummon').value.trim().split('\n').filter(id => id.trim());
+      if (!ids.length) { showToast('يرجى إدخال الآيديات', 'error'); return; }
+
+      const formatted = ids.map(id => `<@${id.trim()}>`).join('\n');
+      const text = `**﷽\n\n\`الموضوع :\` إستدعاء\n\n\`الـعسكري :\`\n\n${formatted}\n\nتوجه إلى روم الشرطة العسكرية\n\n\`لديك مهلة 3 ساعات خلاف ذلك يصدر الحكم مباشرة\`\n\n\`\`\`diff\n-- يمنع عليك مباشرة الميدان إلا بعد التوجه\n- خلاف ذلك يتم الحكم عليك غيابياً\n\`\`\`**`;
+
+      navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
+    }
+
+    function copyLogin() {
+      const ids = document.getElementById('additionalIdsLogin').value.trim().split('\n').filter(id => id.trim());
+      if (!ids.length) { showToast('يرجى إدخال الآيديات', 'error'); return; }
+
+      const formatted = ids.map(id => `<@${id.trim()}>`).join('\n');
+      const text = `**﷽\n\n\`\`\`diff\n- بادر تسجيل دخول في الخدمة العسكرية\n\`\`\`\n\n${formatted}\n\nمهلة 20 دقيقة**`;
+
+      navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
+    }
+
+    function copyAssignment() {
+      const section = document.getElementById('assignmentSection').value;
+      const ids = document.getElementById('soldierIdsAssignment').value.trim().split('\n').filter(id => id.trim());
+      
+      if (!section || !ids.length) { showToast('يرجى ملء جميع الحقول', 'error'); return; }
+
+      const formatted = ids.map(id => `<@${id.trim()}>`).join('\n');
+      const text = `**﷽\n\nقرار صادر من : <@&1417408661625634858>\n\nالموضوع : || تعيين ||\n\n- ينص على :\n\nيتم تعيين المذكورين أدناه بـ <@&${section}>\n\n${formatted}**`;
+
+      navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
+    }
+
+    function copyExemption() {
+      const ids = document.getElementById('soldierCopyIdExemption').value.trim().split('\n').filter(id => id.trim());
+      if (!ids.length) { showToast('يرجى إدخال الآيديات', 'error'); return; }
+
+      const formatted = ids.map(id => `<@${id.trim()}>`).join('\n');
+      const text = `**﷽\n\nقرار صادر من : <@&1417408661625634858>\n\nالموضوع : || إعفاء ||\n\n- ينص على :\n\nيتم إعفاء المذكورين أدناه\n\n${formatted}\n\nشكراً لك على ما قدمته لخدمة القطاع**`;
+
+      navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
+    }
+  </script>
+
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
+
