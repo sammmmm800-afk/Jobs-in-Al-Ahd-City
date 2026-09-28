@@ -289,7 +289,6 @@
           <option value="استدعاء">استدعاء عسكري</option>
           <option value="تسجيل_دخول">بادر تسجيل دخول</option>
           <option value="تعيين">تعيين عسكري</option>
-          <option value="ترقية">ترقية عسكرية</option>
           <option value="إعفاء">إعفاء عسكري</option>
         </select>
       </div>
@@ -380,9 +379,9 @@
           <label>قسم التعيين</label>
           <select class="form-select" id="assignmentSection">
             <option value="">اختر قسم التعيين</option>
-            <option value="قسم المتابعة والإشراف">قسم المتابعة والإشراف</option>
-            <option value="هيئة المحاكمات العسكرية">هيئة المحاكمات العسكرية</option>
-            <option value="مجلس القضاء العسكري">مجلس القضاء العسكري</option>
+            <option value="1488555833947328756">الشؤون الإدارية</option>
+            <option value="1488564136643268788">الشرطة العسكرية</option>
+            <option value="1488580464032616581">مجلس القضاء العسكري</option>
           </select>
         </div>
         <div class="form-group">
@@ -390,33 +389,6 @@
           <textarea class="form-textarea" id="soldierIdsAssignment" placeholder="123456789012345678&#10;987654321098765432"></textarea>
         </div>
         <button class="submit-btn" onclick="copyAssignment()">نسخ نص التعيين</button>
-      </div>
-
-      <!-- ترقية عسكرية -->
-      <div id="formPromotion" class="form-section">
-        <div class="form-group">
-          <label>من قسم</label>
-          <select class="form-select" id="fromSection">
-            <option value="">اختر القسم</option>
-            <option value="قسم المتابعة والإشراف">قسم المتابعة والإشراف</option>
-            <option value="هيئة المحاكمات العسكرية">هيئة المحاكمات العسكرية</option>
-            <option value="مجلس القضاء العسكري">مجلس القضاء العسكري</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>إلى قسم</label>
-          <select class="form-select" id="toSection">
-            <option value="">اختر القسم</option>
-            <option value="قسم المتابعة والإشراف">قسم المتابعة والإشراف</option>
-            <option value="هيئة المحاكمات العسكرية">هيئة المحاكمات العسكرية</option>
-            <option value="مجلس القضاء العسكري">مجلس القضاء العسكري</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>كوبي آيدي العسكريين (لكل سطر)</label>
-          <textarea class="form-textarea" id="soldierCopyIdPromotion" placeholder="123456789012345678&#10;987654321098765432"></textarea>
-        </div>
-        <button class="submit-btn" onclick="copyPromotion()">نسخ نص الترقية</button>
       </div>
 
       <!-- إعفاء عسكري -->
@@ -462,7 +434,6 @@
         'استدعاء': 'formSummon',
         'تسجيل_دخول': 'formLogin',
         'تعيين': 'formAssignment',
-        'ترقية': 'formPromotion',
         'إعفاء': 'formExemption'
       };
       
@@ -543,20 +514,7 @@
       if (!section || !ids.length) { showToast('يرجى ملء جميع الحقول', 'error'); return; }
 
       const formatted = ids.map(id => `<@${id.trim()}>`).join('\n');
-      const text = `**﷽\n\nقرار صادر من : <@&1417408661625634858>\n\nالموضوع : || تعيين ||\n\n- ينص على :\n\nيتم تعيين المذكورين أدناه بـ ${section}\n\n${formatted}**`;
-
-      navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
-    }
-
-    function copyPromotion() {
-      const from = document.getElementById('fromSection').value;
-      const to = document.getElementById('toSection').value;
-      const ids = document.getElementById('soldierCopyIdPromotion').value.trim().split('\n').filter(id => id.trim());
-      
-      if (!from || !to || !ids.length) { showToast('يرجى ملء جميع الحقول', 'error'); return; }
-
-      const formatted = ids.map(id => `<@${id.trim()}>`).join('\n');
-      const text = `**﷽\n\nقرار صادر من : <@&1417408661625634858>\n\nالموضوع : || ترقية ||\n\n- ينص على :\n\nيتم رفع المذكورين أدناه من ${from} إلى ${to}\n\n${formatted}**`;
+      const text = `**﷽\n\nقرار صادر من : <@&1417408661625634858>\n\nالموضوع : || تعيين ||\n\n- ينص على :\n\nيتم تعيين المذكورين أدناه بـ <@&${section}>\n\n${formatted}**`;
 
       navigator.clipboard.writeText(text).then(() => showToast('✅ تم النسخ بنجاح!'));
     }
