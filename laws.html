@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الأنظمة والقوانين - مديرية الأمن العام</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f1a35;
+      --accent: #4a90d9;
+      --accent-dark: #2d6bb3;
+      --bg-dark: #080d1a;
+      --bg-card: rgba(15, 26, 53, 0.8);
+      --border: rgba(74, 144, 217, 0.3);
+      --border-light: rgba(255, 255, 255, 0.1);
+      --text: #e8ecf4;
+      --text-muted: rgba(232, 236, 244, 0.7);
+      --text-dim: rgba(232, 236, 244, 0.5);
+      --level-1: #22c55e;
+      --level-2: #84cc16;
+      --level-3: #eab308;
+      --level-4: #f97316;
+      --level-5: #ef4444;
+      --level-6: #dc2626;
+      --level-7: #991b1b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    .bg-animation {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(ellipse at 20% 0%, rgba(42, 64, 128, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(74, 144, 217, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(15, 26, 53, 0.9) 0%, var(--bg-dark) 70%);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: rgba(8, 13, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo img {
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      background: white;
+    }
+
+    .nav-logo span { font-size: 16px; font-weight: 700; color: var(--accent); }
+
+    .nav-links { display: flex; gap: 20px; }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover { background: rgba(74, 144, 217, 0.15); color: var(--accent); }
+
+    .hero {
+      padding: 140px 20px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p { color: var(--text-muted); font-size: 18px; }
+
+    .search-section {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .search-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 8px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      color: var(--text);
+      font-family: inherit;
+      outline: none;
+    }
+
+    .search-btn {
+      padding: 16px 30px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .search-results-info {
+      text-align: center;
+      padding: 15px;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    .search-results-info.show { display: block; }
+
+    .clear-search {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 6px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      margin-right: 10px;
+    }
+
+    .quick-nav {
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+    }
+
+    .quick-nav-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .quick-nav-btn {
+      padding: 12px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-nav-btn:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .quick-nav-btn .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 100px;
+    }
+
+    .violation-section {
+      margin-bottom: 40px;
+      scroll-margin-top: 100px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 25px 30px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .level-indicator {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: white;
+    }
+
+    .section-info h2 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+    .section-info p { font-size: 14px; color: var(--text-muted); }
+
+    .violations-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .violation-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 16px 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .violation-item:hover {
+      background: rgba(74, 144, 217, 0.1);
+      border-color: var(--accent);
+    }
+
+    .violation-item.hidden { display: none; }
+    .violation-item.highlight { background: rgba(74, 144, 217, 0.2); border-color: var(--accent); }
+
+    .violation-code {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      white-space: nowrap;
+    }
+
+    .violation-text { font-size: 15px; color: var(--text); }
+
+    .punishment-section {
+      margin-top: 60px;
+      scroll-margin-top: 100px;
+    }
+
+    .punishment-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+
+    .punishment-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .punishment-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .punishment-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    .punishment-item .rank { font-weight: 600; color: var(--accent); }
+    .punishment-item .penalty { color: var(--text-muted); font-size: 14px; }
+
+    .rules-section {
+      margin-top: 60px;
+      padding: 30px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .rules-section h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .rule-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rule-item:last-child { border-bottom: none; }
+    .rule-item p { font-size: 14px; color: var(--text); }
+
+    .footer {
+      background: rgba(8, 13, 26, 0.95);
+      border-top: 1px solid var(--border);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer p { color: var(--text-dim); font-size: 14px; margin: 8px 0; }
+    .footer a { color: var(--accent); text-decoration: none; }
+
+    .footer-credit {
+      display: inline-block;
+      margin: 15px 0;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, rgba(74, 144, 217, 0.2), rgba(74, 144, 217, 0.05));
+      border: 1px solid rgba(74, 144, 217, 0.3);
+      border-radius: 20px;
+      color: var(--accent);
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 999;
+    }
+
+    .back-to-top.show { opacity: 1; visibility: visible; }
+    .back-to-top:hover { transform: translateY(-5px); }
+
+    @media (max-width: 768px) {
+      .navbar { padding: 0 20px; }
+      .nav-links { display: none; }
+      .section-header { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="شعار الأمن العام">
+        <span>الأمن العام</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">الرئيسية</a>
+        <a href="index.html#reports" class="nav-link">التقارير</a>
+        <a href="forms.html" class="nav-link">النماذج الإدارية</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>الأنظمة والقوانين</h1>
+    <p>لائحة المخالفات والعقوبات الرسمية لمديرية الأمن العام</p>
+  </section>
+
+  <div class="search-section">
+    <div class="search-box">
+      <input type="text" class="search-input" id="searchInput" placeholder="ابحث في القوانين...">
+      <button class="search-btn" onclick="performSearch()">بحث</button>
+    </div>
+    <div class="search-results-info" id="searchResultsInfo"></div>
+  </div>
+
+  <div class="quick-nav">
+    <div class="quick-nav-grid">
+      <button class="quick-nav-btn" onclick="scrollToSection('level1')"><span class="dot" style="background:var(--level-1)"></span>الدرجة الأولى</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('level2')"><span class="dot" style="background:var(--level-2)"></span>الدرجة الثانية</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('level3')"><span class="dot" style="background:var(--level-3)"></span>الدرجة الثالثة</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('level4')"><span class="dot" style="background:var(--level-4)"></span>الدرجة الرابعة</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('level5')"><span class="dot" style="background:var(--level-5)"></span>الدرجة الخامسة</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('level6')"><span class="dot" style="background:var(--level-6)"></span>الدرجة السادسة</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('level7')"><span class="dot" style="background:var(--level-7)"></span>الدرجة السابعة</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('punishments')"><span class="dot" style="background:var(--accent)"></span>لائحة العقوبات</button>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <!-- Level 1 -->
+    <section class="violation-section" id="level1">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--level-1),#16a34a)">1</div>
+        <div class="section-info">
+          <h2>بنود الدرجة الأولى</h2>
+          <p>إنذارات خفيفة - غرامة من 100 إلى 500 ألف حسب الرتبة</p>
+        </div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-1</span><span class="violation-text">استيقاف مروري أو جنائي خاطئ</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-2</span><span class="violation-text">مخالفة قوانين نقاط التفتيش</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-3</span><span class="violation-text">مخالفة قوانين المصادرات بشكل عام</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-4</span><span class="violation-text">عدم تسليم المضبوطات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-5</span><span class="violation-text">إعطاء تفتيش لمواطن غير صحيح</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-6</span><span class="violation-text">مخالفة قوانين التفتيش أو القبض الخاطئ</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-7</span><span class="violation-text">مباشرة الميدان برتبة شخصية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-8</span><span class="violation-text">مخالفة قوانين المشاركة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-9</span><span class="violation-text">عدم الالتزام بالزي العسكري المحدد برتبتك</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-10</span><span class="violation-text">مخالفة قوانين المشاركة العسكرية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-11</span><span class="violation-text">عدم إبلاغ العسكري المحدد برتبتك</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-12</span><span class="violation-text">البقاء في المركز دون وجود سبب</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-1)">1-13</span><span class="violation-text">قيادة غير نظامية</span></div>
+      </div>
+    </section>
+
+    <!-- Level 2 -->
+    <section class="violation-section" id="level2">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--level-2),#65a30d)">2</div>
+        <div class="section-info">
+          <h2>بنود الدرجة الثانية</h2>
+          <p>إنذار وظيفي - غرامة من 150 إلى 500 ألف حسب الرتبة</p>
+        </div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-1</span><span class="violation-text">دخول موجات غير معتمدة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-2</span><span class="violation-text">عدم التجاوب في الموجة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-3</span><span class="violation-text">عدم الالتزام بالعدد المعتمد</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-4</span><span class="violation-text">عدم أخذ الدورات اللازمة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-5</span><span class="violation-text">عدم الالتزام بالمظهر العسكري (الشعر – الوشوم – اللبس)</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-6</span><span class="violation-text">عدم الالتزام بالنظافة العسكرية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-7</span><span class="violation-text">تهور مروري</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-8</span><span class="violation-text">المشادة في شات رسائل إدارة الشرطة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-9</span><span class="violation-text">النزول الميداني بدون تصنيف</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-10</span><span class="violation-text">إهمال العمل الإداري أو الميداني</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-11</span><span class="violation-text">عدم الالتزام ببروتوكولات الراديو</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-12</span><span class="violation-text">إعطاء مخالفة غير مستحقة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-13</span><span class="violation-text">البقاء في المركز فترة دون مبرر</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-14</span><span class="violation-text">عدم الالتزام ببرنامج الجولة اليومية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-15</span><span class="violation-text">سحب السلاح دون وجه حق</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-16</span><span class="violation-text">إهمال الميدان</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-17</span><span class="violation-text">غموض أكثر من 10 دقائق</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-18</span><span class="violation-text">عدم الالتزام بصيغة التقارير</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-2)">2-19</span><span class="violation-text">عدم الالتزام بالتعليمات</span></div>
+      </div>
+    </section>
+
+    <!-- Levels 3-7 continue similarly... -->
+    <section class="violation-section" id="level3">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--level-3),#ca8a04)">3</div>
+        <div class="section-info"><h2>بنود الدرجة الثالثة</h2><p>توبيخ - غرامة من 300 إلى 700 ألف حسب الرتبة</p></div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-1</span><span class="violation-text">عدم التقيد بقواعد المطاردات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-2</span><span class="violation-text">مخالفة قوانين الاعتقال والتعامل مع المتهمين</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-3</span><span class="violation-text">سوء التعامل مع الحالات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-4</span><span class="violation-text">الإهمال في أداء العمل</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-5</span><span class="violation-text">مخالفة قوانين التوجه للحالات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-6</span><span class="violation-text">مخالفة قوانين الحواجز والحدود</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-7</span><span class="violation-text">دخول موجة بدون إذن</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-8</span><span class="violation-text">التهرب من استلام مهام العمليات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-9</span><span class="violation-text">مخالفة قوانين العمليات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-10</span><span class="violation-text">التدخل في مهمات الوحدات الأخرى</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-11</span><span class="violation-text">تسجيل دخول مباشرة حالة ثم تسجيل خروج</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-12</span><span class="violation-text">إضافة مخالفات أو نقص في التحقيقات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-13</span><span class="violation-text">إطلاق النار بشكل عشوائي</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-14</span><span class="violation-text">تحرير رهائن بدون إذن</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-15</span><span class="violation-text">مخالفة قوانين القيادة العسكرية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-16</span><span class="violation-text">كشف هوية البلاغ الجنائي</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-17</span><span class="violation-text">الانسحاب من موقع البلاغ دون إذن</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-18</span><span class="violation-text">عدم الالتزام بضوابط التفاوض</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-19</span><span class="violation-text">استخدام سلاح غير مصرح به</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-20</span><span class="violation-text">إسقاط عزل</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-21</span><span class="violation-text">عدم الالتزام بأوامر العمليات</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-22</span><span class="violation-text">عدم تقدير حالة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-23</span><span class="violation-text">مخالفة قوانين التفتيش أو الاستيقاف الأمني</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-3)">3-24</span><span class="violation-text">مخالفة قوانين مدة السجن</span></div>
+      </div>
+    </section>
+
+    <section class="violation-section" id="level4">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--level-4),#ea580c)">4</div>
+        <div class="section-info"><h2>بنود الدرجة الرابعة</h2><p>عقوبات مشددة - غرامة من 500 ألف إلى 1 مليون أو فصل</p></div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-1</span><span class="violation-text">مخالفة قوانين نداء الاستغاثة أو الاستنفار الأمني</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-2</span><span class="violation-text">التقصير في النداء الطارئ أو الميدان</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-3</span><span class="violation-text">عدم الالتزام بالمسار العسكري المحدد بالتكتيك</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-4</span><span class="violation-text">رسملة شكوى أو بلاغات بطريقة خاطئة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-5</span><span class="violation-text">مباشرة الميدان دون الوجود بالموجة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-6</span><span class="violation-text">إهمال الميدان</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-7</span><span class="violation-text">عدم احترام أو مضايقة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-8</span><span class="violation-text">اسم غير مطابق (الشخصية أو المدنية)</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-4)">4-9</span><span class="violation-text">استخدام أوامر F8 بشكل خاطئ</span></div>
+      </div>
+    </section>
+
+    <section class="violation-section" id="level5">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--level-5),#dc2626)">5</div>
+        <div class="section-info"><h2>بنود الدرجة الخامسة</h2><p>عسكرية مباشرة + إمكانية الفصل</p></div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-1</span><span class="violation-text">سجن عسكري بقصد الاستهتار</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-2</span><span class="violation-text">التلاعب على المسؤولين</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-3</span><span class="violation-text">مخالفة قوانين عدم الإفصاح</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-4</span><span class="violation-text">محاولة تهريب مواطن</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-5</span><span class="violation-text">سوء التعامل أو التعدي على مواطن</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-6</span><span class="violation-text">عدم التقيد بالأنظمة الصحية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-7</span><span class="violation-text">التوجه خارج الرتب العسكرية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-8</span><span class="violation-text">الخروج من الميدان</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-9</span><span class="violation-text">سجن عسكري بدون أوامر</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-10</span><span class="violation-text">التخريب الوظيفي</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-11</span><span class="violation-text">عدم الجدية أثناء الدوام العسكري</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-12</span><span class="violation-text">إساءة استخدام القطاعات الحكومية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-13</span><span class="violation-text">عدم احترام تسلسل الرتب</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-14</span><span class="violation-text">التمرد العسكري</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-15</span><span class="violation-text">تهديد الأمن العسكري</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-16</span><span class="violation-text">التلاعب بالتقارير</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-17</span><span class="violation-text">الإساءة إلى الشرطة العسكرية</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-5)">5-18</span><span class="violation-text">سوء استخدام السلاح</span></div>
+      </div>
+    </section>
+
+    <section class="violation-section" id="level6">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--level-6),#b91c1c)">6</div>
+        <div class="section-info"><h2>بنود الدرجة السادسة</h2><p>المنع النهائي - فصل من الخدمة</p></div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-1</span><span class="violation-text">التمرد على الزملاء بدافع الحقد</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-2</span><span class="violation-text">عدم احترام الرتب العليا</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-3</span><span class="violation-text">الخروج عن حدود الدولة (دسكورد)</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-4</span><span class="violation-text">خيانة الأمانة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-5</span><span class="violation-text">تصرف غير لائق عسكرياً</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-6</span><span class="violation-text">التلاعب بعدد العهد</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-7</span><span class="violation-text">التخريب بوظيفة حرس الحدود</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-8</span><span class="violation-text">عدم التواجد لفترة تتجاوز 3 أسابيع</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-9</span><span class="violation-text">إثارة الجدل الفني</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-10</span><span class="violation-text">الفساد العسكري</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-11</span><span class="violation-text">نشر أسماء سيرفرات أخرى</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-12</span><span class="violation-text">تعديل المخالفات دون إذن</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-6)">6-13</span><span class="violation-text">استخدام السلطة لمصلحة شخصية</span></div>
+      </div>
+    </section>
+
+    <section class="violation-section" id="level7">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--level-7),#7f1d1d)">7</div>
+        <div class="section-info"><h2>بنود الدرجة السابعة</h2><p>فصل نهائي + رفع للقيادة العليا</p></div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-7)">7-1</span><span class="violation-text">عدم احترام القيادة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-7)">7-2</span><span class="violation-text">عدم الانضباط لأوامر القيادة</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--level-7)">7-3</span><span class="violation-text">التخريب بالأشخاص أو الإصابات</span></div>
+      </div>
+    </section>
+
+    <!-- Punishments -->
+    <section class="punishment-section" id="punishments">
+      <h2 style="font-size:28px;text-align:center;margin-bottom:40px;color:var(--accent)">لائحة العقوبات الرسمية حسب الرتبة</h2>
+      <p style="text-align:center;color:var(--text-muted);margin-bottom:30px;">تُحدد العقوبة حسب درجة المخالفة + الرتبة، ويجوز للقيادة التشديد أو التخفيف (تقديري)</p>
+      
+      <!-- Level 1 Punishments -->
+      <div class="punishment-card">
+        <h3 style="color:var(--level-1)">الدرجة الأولى (إنذارات خفيفة)</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">جندي</span><span class="penalty">إنذار شفهي + غرامة 100 ألف</span></div>
+          <div class="punishment-item"><span class="rank">جندي أول</span><span class="penalty">إنذار شفهي + غرامة 100 ألف</span></div>
+          <div class="punishment-item"><span class="rank">عريف / وكيل رقيب</span><span class="penalty">إنذار شفهي + غرامة 150 ألف</span></div>
+          <div class="punishment-item"><span class="rank">رقيب / رقيب أول</span><span class="penalty">إنذار شفهي + غرامة 200 ألف</span></div>
+          <div class="punishment-item"><span class="rank">رئيس رقباء</span><span class="penalty">إنذار شفهي + غرامة 300 ألف</span></div>
+          <div class="punishment-item"><span class="rank">ملازم</span><span class="penalty">إنذار شفهي + غرامة 350 ألف</span></div>
+          <div class="punishment-item"><span class="rank">ملازم أول</span><span class="penalty">إنذار شفهي + غرامة 400 ألف</span></div>
+          <div class="punishment-item"><span class="rank">نقيب فما أعلى</span><span class="penalty">إنذار شفهي + غرامة 500 ألف</span></div>
+        </div>
+      </div>
+
+      <!-- Level 2 Punishments -->
+      <div class="punishment-card">
+        <h3 style="color:var(--level-2)">الدرجة الثانية (إنذار وظيفي)</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">جندي</span><span class="penalty">إنذار وظيفي + غرامة 150 ألف</span></div>
+          <div class="punishment-item"><span class="rank">جندي أول</span><span class="penalty">إنذار وظيفي + غرامة 150 ألف</span></div>
+          <div class="punishment-item"><span class="rank">عريف / وكيل رقيب</span><span class="penalty">إنذار وظيفي + غرامة 300 ألف</span></div>
+          <div class="punishment-item"><span class="rank">رقيب / رقيب أول</span><span class="penalty">إنذار وظيفي + غرامة 300 ألف</span></div>
+          <div class="punishment-item"><span class="rank">رئيس رقباء</span><span class="penalty">إنذار وظيفي + غرامة 400 ألف</span></div>
+          <div class="punishment-item"><span class="rank">ملازم</span><span class="penalty">إنذار وظيفي + غرامة 400 ألف</span></div>
+          <div class="punishment-item"><span class="rank">ملازم أول</span><span class="penalty">إنذار وظيفي + غرامة 500 ألف</span></div>
+          <div class="punishment-item"><span class="rank">نقيب فما أعلى</span><span class="penalty">إنذار وظيفي + غرامة 500 ألف</span></div>
+        </div>
+      </div>
+
+      <!-- Level 3 Punishments -->
+      <div class="punishment-card">
+        <h3 style="color:var(--level-3)">الدرجة الثالثة (توبيخ)</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">جندي</span><span class="penalty">توبيخ + غرامة 300 ألف</span></div>
+          <div class="punishment-item"><span class="rank">جندي أول</span><span class="penalty">توبيخ + غرامة 300 ألف</span></div>
+          <div class="punishment-item"><span class="rank">عريف / وكيل رقيب</span><span class="penalty">توبيخ + غرامة 350 ألف</span></div>
+          <div class="punishment-item"><span class="rank">رقيب / رقيب أول</span><span class="penalty">توبيخ + غرامة 400 ألف</span></div>
+          <div class="punishment-item"><span class="rank">رئيس رقباء</span><span class="penalty">توبيخ + غرامة 500 ألف</span></div>
+          <div class="punishment-item"><span class="rank">ملازم</span><span class="penalty">توبيخ + غرامة 500 ألف</span></div>
+          <div class="punishment-item"><span class="rank">ملازم أول</span><span class="penalty">توبيخ + غرامة 600 ألف</span></div>
+          <div class="punishment-item"><span class="rank">نقيب فما أعلى</span><span class="penalty">توبيخ + غرامة 700 ألف</span></div>
+        </div>
+      </div>
+
+      <!-- Level 4 Punishments -->
+      <div class="punishment-card">
+        <h3 style="color:var(--level-4)">الدرجة الرابعة (عقوبات مشددة)</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">جندي</span><span class="penalty">توبيخ + غرامة 500 ألف</span></div>
+          <div class="punishment-item"><span class="rank">جندي أول</span><span class="penalty">توبيخ + غرامة 500 ألف</span></div>
+          <div class="punishment-item"><span class="rank">عريف / وكيل رقيب</span><span class="penalty">توبيخ + غرامة 700 ألف</span></div>
+          <div class="punishment-item"><span class="rank">رقيب / رقيب أول</span><span class="penalty">توبيخ + غرامة 1 مليون</span></div>
+          <div class="punishment-item"><span class="rank">رئيس رقباء</span><span class="penalty">توبيخ + غرامة 1 مليون</span></div>
+          <div class="punishment-item"><span class="rank">ملازم</span><span class="penalty">توبيخ + غرامة 1 مليون</span></div>
+          <div class="punishment-item"><span class="rank">ملازم أول</span><span class="penalty">توبيخ + غرامة 1 مليون + حرمان ترقية</span></div>
+          <div class="punishment-item"><span class="rank">نقيب فما أعلى</span><span class="penalty">فصل من الخدمة (تقديري)</span></div>
+        </div>
+      </div>
+
+      <!-- Level 5 Punishments -->
+      <div class="punishment-card">
+        <h3 style="color:var(--level-5)">الدرجة الخامسة (عسكرية)</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">جميع الرتب</span><span class="penalty">عسكرية مباشرة + إمكانية الفصل (حسب التقدير)</span></div>
+        </div>
+      </div>
+
+      <!-- Level 6 Punishments -->
+      <div class="punishment-card">
+        <h3 style="color:var(--level-6)">الدرجة السادسة (فصل)</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">جميع الرتب</span><span class="penalty">فصل من الخدمة</span></div>
+        </div>
+      </div>
+
+      <!-- Level 7 Punishments -->
+      <div class="punishment-card">
+        <h3 style="color:var(--level-7)">الدرجة السابعة (فصل نهائي)</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">جميع الرتب</span><span class="penalty">فصل نهائي + رفع للقيادة العليا</span></div>
+        </div>
+      </div>
+
+      <!-- General Rules -->
+      <div class="punishment-card">
+        <h3>ضوابط عامة</h3>
+        <div class="punishment-list">
+          <div class="punishment-item"><span class="rank">تكرار المخالفة</span><span class="penalty">مضاعفة العقوبة ×2</span></div>
+          <div class="punishment-item"><span class="rank">عدم حضور الاستدعاء</span><span class="penalty">مضاعفة العقوبة خلال 24 ساعة</span></div>
+          <div class="punishment-item"><span class="rank">مخالفة غير مدرجة</span><span class="penalty">يتم التقدير حسب الأقرب لها</span></div>
+          <div class="punishment-item"><span class="rank">جميع الغرامات</span><span class="penalty">تُسلَّم للجهة المختصة</span></div>
+          <div class="punishment-item"><span class="rank">القرارات النهائية</span><span class="penalty">بيد القيادة المختصة</span></div>
+        </div>
+      </div>
+
+      <!-- Important Guidelines -->
+      <div class="punishment-card">
+        <h3>توجيهات هامة</h3>
+        <div class="rules-list" style="display:flex;flex-direction:column;gap:10px;">
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• في حال تكرار المخالفة يتم تبديل العقوبة ×2، في حال أخذت إنذارين وتخالف مخالفة عقوبتها إنذار وظيفي أول، وتمتلك إنذارين العقوبة تكون (كسر رتبة)</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• البنود قابلة للتعديل ويرجى مراجعتها بشكل مستمر</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• في حال كانت مخالفات غير موجودة في البنود يتم محاسبتك تقديرياً من رئاسة المجلس العسكري أو قيادة الأمن العام</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• يجب تقديم دليل كافي لأخذ قرار من قبل المجلس العسكري</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• جميع الغرامات تسلم إلى رئاسة القسم العسكري أو قيادة الأمن العام في حال التسليم يكون إجباري عن طريق الرقابة والتفتيش</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• لن يتم إزالة أي إنذار إلا بعد تسليم الغرامة ومدة 7 أيام من تاريخ العقوبة</p>
+        </div>
+      </div>
+
+      <!-- Fixed Laws -->
+      <div class="punishment-card">
+        <h3>قوانين ثابتة</h3>
+        <div class="rules-list" style="display:flex;flex-direction:column;gap:10px;">
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• لا يمكنك الاعتراض على الحكم بعد إصداره بمدة لا تزيد عن 24 ساعة وبعدها لا يمكنك الاعتراض</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• عدم حضور استدعاء المحكمة بعد مرور 12 ساعة يتم محاكمتك غيابياً</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• في حال لم تسدد الغرامة خلال مدة أقصاها 7 أيام يتم تبديل الغرامة</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• عند حصولك على حكم عسكري وغرامة لن يتم ترقيتك حتى إذا كنت مستحق إلا بعد سداد الغرامة وانتهاء فترة الحكم العسكري</p>
+          <p style="padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;">• في حال طلب استقالة بعد إصدار حكم: فصل من السلك العسكري وغرامة مليون</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>جميع الحقوق محفوظة © 2026 | مديرية الأمن العام - مدينة العهد</p>
+    <p><span class="footer-credit">تنفيذ - هيال المطيري ❤️</span></p>
+    <p><a href="https://discord.gg/a14" target="_blank">discord.gg/a14</a></p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
+  <script>
+    // Disable right-click, copying, and selecting
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('cut', e => e.preventDefault());
+    document.addEventListener('selectstart', e => e.preventDefault());
+
+    const searchInput = document.getElementById('searchInput');
+    const searchResultsInfo = document.getElementById('searchResultsInfo');
+
+    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') performSearch(); });
+
+    function performSearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      if (!query) { clearSearch(); return; }
+
+      const allItems = document.querySelectorAll('.violation-item');
+      let matchCount = 0;
+
+      allItems.forEach(item => {
+        const text = item.querySelector('.violation-text').textContent.toLowerCase();
+        const code = item.querySelector('.violation-code').textContent.toLowerCase();
+        
+        if (text.includes(query) || code.includes(query)) {
+          item.classList.remove('hidden');
+          item.classList.add('highlight');
+          matchCount++;
+        } else {
+          item.classList.add('hidden');
+          item.classList.remove('highlight');
+        }
+      });
+
+      searchResultsInfo.innerHTML = `تم العثور على <strong>${matchCount}</strong> نتيجة <button class="clear-search" onclick="clearSearch()">مسح البحث</button>`;
+      searchResultsInfo.classList.add('show');
+    }
+
+    function clearSearch() {
+      searchInput.value = '';
+      document.querySelectorAll('.violation-item').forEach(item => {
+        item.classList.remove('hidden', 'highlight');
+      });
+      searchResultsInfo.classList.remove('show');
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      btn.classList.toggle('show', window.scrollY > 500);
+    });
+  </script>
+
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
+
