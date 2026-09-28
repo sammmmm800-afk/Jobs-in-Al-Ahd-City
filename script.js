@@ -95,8 +95,6 @@ function generateLosReport() {
   report += `—————————————————\n\n`;
   report += `الـشـرطـة الـعـسـكـريـة :\n${formatCodes(document.getElementById('losMilitary').value)}\n`;
   report += `—————————————————\n\n`;
-  report += `ضـابـط خـفـر :\n${formatCodes(document.getElementById('losGuard').value)}\n`;
-  report += `—————————————————\n\n`;
   report += `جيم 1 :\n${formatCodes(document.getElementById('losJim1').value)}\n\n`;
   report += `—————————————————\n\n`;
   report += `جيم 2 :\n${formatCodes(document.getElementById('losJim2').value)}\n`;
@@ -132,8 +130,6 @@ function generateSandyReport() {
   report += `الـدورات الـمـفـعـلـة :\n${document.getElementById('sandyCourses').value || 'لا يوجد'}\n\n`;
   report += `—————————————————\n\n`;
   report += `الـشـرطـة الـعـسـكـريـة :\n${formatCodes(document.getElementById('sandyMilitary').value)}\n\n`;
-  report += `—————————————————\n\n`;
-  report += `ضـابـط خـفـر :\n${formatCodes(document.getElementById('sandyGuard').value)}\n\n`;
   report += `—————————————————\n\n`;
   report += `سـيـن 1 :\n${formatCodes(document.getElementById('sandySin1').value)}\n`;
   report += `—————————————————\n\n`;
