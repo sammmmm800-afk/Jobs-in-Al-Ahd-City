@@ -350,6 +350,16 @@
     .rule-item:last-child { border-bottom: none; }
     .rule-item p { font-size: 14px; color: var(--text); }
 
+    .law-notice {
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: rgba(74, 144, 217, 0.12);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
     .footer {
       background: rgba(8, 13, 26, 0.95);
       border-top: 1px solid var(--border);
@@ -438,11 +448,39 @@
       <button class="quick-nav-btn" onclick="scrollToSection('level5')"><span class="dot" style="background:var(--level-5)"></span>الدرجة الخامسة</button>
       <button class="quick-nav-btn" onclick="scrollToSection('level6')"><span class="dot" style="background:var(--level-6)"></span>الدرجة السادسة</button>
       <button class="quick-nav-btn" onclick="scrollToSection('level7')"><span class="dot" style="background:var(--level-7)"></span>الدرجة السابعة</button>
+      <button class="quick-nav-btn" onclick="scrollToSection('public-security-law')"><span class="dot" style="background:var(--accent)"></span>قانون الأمن العام</button>
       <button class="quick-nav-btn" onclick="scrollToSection('punishments')"><span class="dot" style="background:var(--accent)"></span>لائحة العقوبات</button>
     </div>
   </div>
 
   <main class="main-content">
+    <section class="violation-section" id="public-security-law">
+      <div class="section-header">
+        <div class="level-indicator" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark))">ق</div>
+        <div class="section-info">
+          <h2>قانون الأمن العام لمدينة العهد</h2>
+          <p>ضوابط تعامل رجال الأمن مع المواطنين والمطاردات</p>
+        </div>
+      </div>
+      <div class="violations-list">
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">1</span><span class="violation-text">يجب على جميع منسوبي إدارة الشرطة احترام جميع المواطنين.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">2</span><span class="violation-text">يمنع رفع السلاح الناري على المواطن دون سبب مقنع.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">3</span><span class="violation-text">يمنع أخذ أي مواطن إلى قسم الشرطة لمجرد الاشتباه دون دليل قاطع.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">4</span><span class="violation-text">يمنع سجن المواطن إلا بعد إثبات التهمة بدليل قاطع وسماع جميع أقواله.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">5</span><span class="violation-text">يمنع تفتيش أي مواطن إلا بعد ثبوت التهمة عليه، ويجب على المواطن مراعاة رجل الأمن عند أمره بنزع السترة أو القناع تجنبًا للتفتيش.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">6</span><span class="violation-text">يسمح لرجل الأمن بتفتيش المواطن في حالة الاشتباه.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">7</span><span class="violation-text">يمنع على رجل الأمن تفتيش مركبة الشخص إلا في حالة الاشتباه.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">8</span><span class="violation-text">لا يحق لرجل الأمن أخذ المواطن إلى القسم بسبب مخالفة مرورية إلا في حال عدم التعاون.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">9</span><span class="violation-text">يمنع التحدث مع المواطنين بتكبر أو التدخل في شؤونهم إلا إذا كان المواطن يقوم بالشغب.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">10</span><span class="violation-text">يمنع منعًا باتًا إعطاء المواطن أي غرض يخص إدارة الشرطة.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">11</span><span class="violation-text">يجب على رجال الأمن إحضار مركبة مخصصة للأفرود في حال وجود مركبة أفرود للمجرمين.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">12</span><span class="violation-text">يمنع الصعود خلف المجرمين عند صعودهم للأفرود بمركبات غير مخصصة لذلك.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">13</span><span class="violation-text">يسمح بسحب السلاح في حالتين: إذا شاهد رجل الأمن شخصًا يطلق النار، أو إذا كان الشخص مسقطًا وفي يده السلاح.</span></div>
+        <div class="violation-item"><span class="violation-code" style="background:var(--accent)">14</span><span class="violation-text">يمنع الصدم أثناء المطاردة منعًا نهائيًا، إلا بعد طلب الإذن من العمليات.</span></div>
+      </div>
+      <p class="law-notice">ملاحظة: هذه القوانين مبدئية وقابلة للتحديث في أي وقت، والجهل بالقوانين لا يعفيك من العقوبة.</p>
+    </section>
+
     <!-- Level 1 -->
     <section class="violation-section" id="level1">
       <div class="section-header">
